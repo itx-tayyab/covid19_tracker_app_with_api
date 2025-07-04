@@ -72,6 +72,7 @@ class _StatsScreenState extends State<StatsScreen>
                           legendOptions: LegendOptions(
                             legendPosition: LegendPosition.left,
                           ),
+                          chartValuesOptions: ChartValuesOptions(showChartValuesInPercentage: true),
                         ),
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * .05),
