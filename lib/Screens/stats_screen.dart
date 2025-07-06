@@ -4,6 +4,7 @@ import 'package:covid19_tracker_app_with_api/Components/covidalldata.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_tracker_app_with_api/Modals/CovidAllDataModal.dart';
 import 'package:covid19_tracker_app_with_api/Screens/countries_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:http/http.dart' as http;
 
@@ -55,7 +56,14 @@ class _StatsScreenState extends State<StatsScreen>
               future: getapidata(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Text('Loading');
+                  return Expanded(
+                    flex: 1,
+                    child: SpinKitFadingCircle(
+                      controller: controller,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  );
                 } else {
                   return Column(
                     children: [

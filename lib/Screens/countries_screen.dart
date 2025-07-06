@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:covid19_tracker_app_with_api/Modals/CountriesAllData.dart';
+import 'package:covid19_tracker_app_with_api/Screens/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shimmer/shimmer.dart';
@@ -83,15 +84,31 @@ class _CountriesScreenState extends State<CountriesScreen> {
 
                         String name = snapshot.data![index].country.toString();
                         if(searchcontroller.text.isEmpty){
-                          return ListTile(
-                            leading: Image(
-                              height: 50,
-                              width: 50,
-                              image: NetworkImage(snapshot.data![index].countryInfo!.flag.toString(),
+                          return InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(
+                                image: snapshot.data![index].countryInfo!.flag.toString(),
+                                name: snapshot.data![index].country.toString(),
+                                cases: snapshot.data![index].cases.toString(),
+                                recovererd: snapshot.data![index].recovered.toString(),
+                                deaths: snapshot.data![index].deaths.toString(),
+                                population: snapshot.data![index].population.toString(),
+                                tests: snapshot.data![index].tests.toString(),
+                                active: snapshot.data![index].active.toString(),
+
+                              )),
+                              );
+                            },
+                            child: ListTile(
+                              leading: Image(
+                                height: 50,
+                                width: 50,
+                                image: NetworkImage(snapshot.data![index].countryInfo!.flag.toString(),
+                                ),
                               ),
+                              title: Text(snapshot.data![index].country.toString()),
+                              subtitle: Text(snapshot.data![index].cases.toString()),
                             ),
-                            title: Text(snapshot.data![index].country.toString()),
-                            subtitle: Text(snapshot.data![index].cases.toString()),
                           );
                         }else if(name.toLowerCase().contains(searchcontroller.text.toLowerCase())){
                           return ListTile(
