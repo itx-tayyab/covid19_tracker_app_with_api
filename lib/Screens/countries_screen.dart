@@ -111,15 +111,31 @@ class _CountriesScreenState extends State<CountriesScreen> {
                             ),
                           );
                         }else if(name.toLowerCase().contains(searchcontroller.text.toLowerCase())){
-                          return ListTile(
-                            leading: Image(
-                              height: 50,
-                              width: 50,
-                              image: NetworkImage(snapshot.data![index].countryInfo!.flag.toString(),
+                          return InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(
+                                image: snapshot.data![index].countryInfo!.flag.toString(),
+                                name: snapshot.data![index].country.toString(),
+                                cases: snapshot.data![index].cases.toString(),
+                                recovererd: snapshot.data![index].recovered.toString(),
+                                deaths: snapshot.data![index].deaths.toString(),
+                                population: snapshot.data![index].population.toString(),
+                                tests: snapshot.data![index].tests.toString(),
+                                active: snapshot.data![index].active.toString(),
+
+                              )),
+                              );
+                            },
+                            child: ListTile(
+                              leading: Image(
+                                height: 50,
+                                width: 50,
+                                image: NetworkImage(snapshot.data![index].countryInfo!.flag.toString(),
+                                ),
                               ),
+                              title: Text(snapshot.data![index].country.toString()),
+                              subtitle: Text(snapshot.data![index].cases.toString()),
                             ),
-                            title: Text(snapshot.data![index].country.toString()),
-                            subtitle: Text(snapshot.data![index].cases.toString()),
                           );
                         }else{
                           Container();
